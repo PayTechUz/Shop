@@ -50,7 +50,6 @@ INSTALLED_APPS = [
 ]
 
 PAYTECHUZ = {
-    'LICENSE_API_KEY': env.str('PAYTECH_LICENSE_API_KEY'),
     'PAYME': {
         'PAYME_ID': env.str('PAYME_ID'),
         'PAYME_KEY': env.str('PAYME_KEY'),

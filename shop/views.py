@@ -22,7 +22,6 @@ class CreateOrderAPIView(APIView):
         order = serializer.save()
 
         try:
-            # Generate payment link based on payment type
             payment_url = generate_payment_link(order)
             order.payment_url = payment_url
             order.save()
@@ -56,7 +55,6 @@ def generate_payment_link(order):
             payme_id=paytechuz_settings['PAYME']['PAYME_ID'],
             payme_key=paytechuz_settings['PAYME']['PAYME_KEY'],
             is_test_mode=paytechuz_settings['PAYME']['IS_TEST_MODE'],
-            license_api_key=paytechuz_settings['LICENSE_API_KEY']
         )
         return payme.create_payment(
             id=order.id,
@@ -70,8 +68,7 @@ def generate_payment_link(order):
             merchant_id=paytechuz_settings['CLICK']['MERCHANT_ID'],
             merchant_user_id=paytechuz_settings['CLICK']['MERCHANT_USER_ID'],
             secret_key=paytechuz_settings['CLICK']['SECRET_KEY'],
-            is_test_mode=paytechuz_settings['CLICK']['IS_TEST_MODE'],
-            license_api_key=paytechuz_settings['LICENSE_API_KEY']
+            is_test_mode=paytechuz_settings['CLICK']['IS_TEST_MODE']
         )
         result = click.create_payment(
             id=order.id,
@@ -92,8 +89,7 @@ def generate_payment_link(order):
                 consumer_secret=atmos_config.get('CONSUMER_SECRET'),
                 store_id=atmos_config.get('STORE_ID'),
                 terminal_id=atmos_config.get('TERMINAL_ID'),
-                is_test_mode=atmos_config.get('IS_TEST_MODE', True),
-                license_api_key=paytechuz_settings['LICENSE_API_KEY']
+                is_test_mode=atmos_config.get('IS_TEST_MODE', True)
             )
 
             # Create payment
