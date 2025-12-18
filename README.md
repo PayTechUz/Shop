@@ -1,8 +1,8 @@
-# PayTech UZ Django 💳
+# PayTech UZ Django
 
-Django REST API loyihasi **Payme**, **Click** va **Atmos** to'lov tizimlarini integratsiyalash uchun. **PaymentService** klassi orqali to'lovlarni yaratish va webhook'lar orqali to'lov holatini kuzatish.
+Payme, Click, Atmos to'lov tizimlari orqali buyurtmalar uchun to'lovlarga misol loyiha.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Virtual Environment yaratish
 
@@ -74,7 +74,7 @@ Server manzil: **http://127.0.0.1:8000/**
 
 ---
 
-## 🧪 cURL Examples
+## cURL Examples
 
 ### Payme to'lovi yaratish
 
@@ -114,7 +114,7 @@ curl -X POST http://127.0.0.1:8000/api/orders/create \
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 `.env` fayli namunasi:
 
@@ -144,7 +144,7 @@ ATMOS_TEST_MODE=True
 
 ---
 
-## 🪝 Webhook Endpoints
+## Webhook Endpoints
 
 To'lov tizimlaridan keladigan webhook'larni qabul qilish uchun:
 
@@ -160,7 +160,7 @@ Webhook'lar avtomatik ravishda order holatini yangilaydi:
 
 
 
-## 📚 Additional Resources
+## Additional Resources
 
 - [PayTech UZ Documentation](https://docs.pay-tech.uz)
 - [Payme API Docs](https://developer.paycom.uz)
@@ -168,13 +168,13 @@ Webhook'lar avtomatik ravishda order holatini yangilaydi:
 
 ---
 
-## 📝 License
+## License
 
 MIT License
 
 ---
 
-## 👨‍💻 Support
+## Support
 
 Savol yoki yordam kerak bo'lsa:
 - Telegram: [@muhammadali_me](https://t.me/muhammadali_me)
