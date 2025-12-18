@@ -82,8 +82,8 @@ Server manzil: **http://127.0.0.1:8000/**
 curl -X POST http://127.0.0.1:8000/api/orders/create \
   -H "Content-Type: application/json" \
   -d '{
-    "product_name": "Premium Plan",
-    "amount": "50000.00",
+    "product_name": "Banana",
+    "amount": 50000,
     "payment_type": "payme"
   }'
 ```
@@ -94,8 +94,8 @@ curl -X POST http://127.0.0.1:8000/api/orders/create \
 curl -X POST http://127.0.0.1:8000/api/orders/create \
   -H "Content-Type: application/json" \
   -d '{
-    "product_name": "Standard Plan",
-    "amount": "30000.00",
+    "product_name": "Apple",
+    "amount": 30000,
     "payment_type": "click"
   }'
 ```
@@ -106,8 +106,8 @@ curl -X POST http://127.0.0.1:8000/api/orders/create \
 curl -X POST http://127.0.0.1:8000/api/orders/create \
   -H "Content-Type: application/json" \
   -d '{
-    "product_name": "Basic Plan",
-    "amount": "20000.00",
+    "product_name": "Orange",
+    "amount": 20000,
     "payment_type": "atmos"
   }'
 ```
