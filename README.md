@@ -1,6 +1,6 @@
 # PayTech UZ Django
 
-Payme, Click, Atmos to'lov tizimlari orqali buyurtmalar uchun to'lovlarga misol loyiha.
+Payme, Click, Uzum to'lov tizimlari orqali buyurtmalar uchun to'lovlarga misol loyiha.
 
 ## Quick Start
 
@@ -70,7 +70,7 @@ Server manzil: **http://127.0.0.1:8000/**
 **Payment Types:**
 - `payme` - Payme to'lov tizimi
 - `click` - Click to'lov tizimi
-- `atmos` - Atmos to'lov tizimi
+- `uzum` - Uzum Bank to'lov tizimi
 
 ---
 
@@ -100,15 +100,15 @@ curl -X POST http://127.0.0.1:8000/api/orders/create \
   }'
 ```
 
-### Atmos to'lovi yaratish
+### Uzum to'lovi yaratish
 
 ```bash
 curl -X POST http://127.0.0.1:8000/api/orders/create \
   -H "Content-Type: application/json" \
   -d '{
-    "product_name": "Orange",
-    "amount": 20000,
-    "payment_type": "atmos"
+    "product_name": "Premium Plan",
+    "amount": 50000,
+    "payment_type": "uzum"
   }'
 ```
 
@@ -133,13 +133,10 @@ CLICK_MERCHANT_ID=your_merchant_id
 CLICK_MERCHANT_USER_ID=your_merchant_user_id
 CLICK_SECRET_KEY=your_secret_key
 
-# Atmos Configuration
-ATMOS_CONSUMER_KEY=your_atmos_consumer_key
-ATMOS_CONSUMER_SECRET=your_atmos_consumer_secret
-ATMOS_STORE_ID=your_atmos_store_id
-ATMOS_TERMINAL_ID=your_atmos_terminal_id  # optional
-ATMOS_API_KEY=your_atmos_api_key
-ATMOS_TEST_MODE=True
+# Uzum Bank Configuration
+UZUM_MERCHANT_ID=your_uzum_merchant_id
+UZUM_MERCHANT_KEY=your_uzum_merchant_key
+UZUM_TEST_MODE=True
 ```
 
 ---
@@ -150,7 +147,7 @@ To'lov tizimlaridan keladigan webhook'larni qabul qilish uchun:
 
 - **Payme Webhook:** `POST /api/payments/payme/webhook/`
 - **Click Webhook:** `POST /api/payments/click/webhook/`
-- **Atmos Webhook:** `POST /api/payments/atmos/webhook/`
+- **Uzum Webhook:** `POST /api/payments/uzum/webhook/`
 
 Webhook'lar avtomatik ravishda order holatini yangilaydi:
 - `successfully_payment()` - To'lov muvaffaqiyatli amalga oshirilganda

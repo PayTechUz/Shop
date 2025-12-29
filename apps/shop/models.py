@@ -14,7 +14,7 @@ class Order(models.Model):
     PAYMENT_TYPE_CHOICES = (
         ('payme', 'Payme'),
         ('click', 'Click'),
-        ('atmos', 'Atmos'),
+        ('uzum', 'Uzum'),
     )
 
     product_name = models.CharField(max_length=255)

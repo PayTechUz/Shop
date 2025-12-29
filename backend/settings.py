@@ -17,6 +17,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    'corsheaders',
+    'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -32,11 +34,11 @@ INSTALLED_APPS = [
 
 PAYTECHUZ = {
     'PAYME': {
-        'PAYME_ID': env.str('PAYME_ID'),
-        'PAYME_KEY': env.str('PAYME_KEY'),
-        'ACCOUNT_MODEL': 'apps.payment.models.Invoice',
         'ACCOUNT_FIELD': 'id',
         'AMOUNT_FIELD': 'amount',
+        'ACCOUNT_MODEL': 'apps.payment.models.Invoice',
+        'PAYME_ID': env.str('PAYME_ID'),
+        'PAYME_KEY': env.str('PAYME_KEY'),
         'ONE_TIME_PAYMENT': True,
         'IS_TEST_MODE': True,
     },
@@ -49,20 +51,20 @@ PAYTECHUZ = {
         'COMMISSION_PERCENT': 0.0,
         'IS_TEST_MODE': True,
     },
-    'ATMOS': {
-        'CONSUMER_KEY': env.str('ATMOS_CONSUMER_KEY'),
-        'CONSUMER_SECRET': env.str('ATMOS_CONSUMER_SECRET'),
-        'STORE_ID': env.str('ATMOS_STORE_ID'),
-        'TERMINAL_ID': env.str('ATMOS_TERMINAL_ID', default=''),
-        'API_KEY': env.str('ATMOS_API_KEY'),
-        'IS_TEST_MODE': env.bool('ATMOS_TEST_MODE', default=True),
-        'ACCOUNT_MODEL': 'apps.payment.models.Invoice',
+    'UZUM': {
         'ACCOUNT_FIELD': 'id',
+        'AMOUNT_FIELD': 'amount',
+        'ACCOUNT_MODEL': 'apps.payment.models.Invoice',
+        'MERCHANT_ID': env.str('UZUM_MERCHANT_ID'),
+        'MERCHANT_KEY': env.str('UZUM_MERCHANT_KEY'),
+        'SERVICE_ID': env.str('UZUM_SERVICE_ID'),
+        'IS_TEST_MODE': env.bool('UZUM_TEST_MODE', default=False),
     }
 }
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -98,6 +100,8 @@ DATABASES = {
     }
 }
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -126,6 +130,66 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+DEFAULT_ADMIN_SITE = 'unfold.sites.UnfoldAdminSite'
+UNFOLD = {
+    'SITE_TITLE': 'PayTechUz',
+    'SITE_HEADER': 'PayTechUz Admin',
+    'SITE_SUBHEADER': 'Operations & Payments',
+    'SITE_URL': '/',
+    'SHOW_BACK_BUTTON': True,
+    'SIDEBAR': {
+        'show_search': True,
+        'command_search': True,
+        'show_all_applications': False,
+        'navigation': [
+            {
+                'title': 'Commerce',
+                'separator': True,
+                'items': [
+                    {
+                        'title': 'Orders',
+                        'icon': 'shopping_bag',  # o'zgaritildi: shopping-cart → shopping-bag
+                        'link': '/admin/shop/order/',
+                    },
+                ],
+            },
+            {
+                'title': 'Payments',
+                'separator': True,
+                'items': [
+                    {
+                        'title': 'Invoices',
+                        'icon': 'attach_money',  # o'zgaritildi: receipt → file-invoice
+                        'link': '/admin/payment/invoice/',
+                    },
+                ],
+            },
+            {
+                'title': 'System',
+                'separator': True,
+                'items': [
+                    {
+                        'title': 'Users',
+                        'icon': 'supervised_user_circle',  # o'zgaritildi: users → user
+                        'link': '/admin/auth/user/',
+                    },
+                    {
+                        'title': 'Groups',
+                        'icon': 'folder_shared',  # o'zgaritildi: users-group → users
+                        'link': '/admin/auth/group/',
+                    },
+                ],
+            },
+        ],
+    },
+    'COMMAND': {
+        'search_models': True,
+        'show_history': True,
+        'search_callback': None,
+    },
+}
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

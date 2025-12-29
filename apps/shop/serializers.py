@@ -23,11 +23,11 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         if value <= 0:
             raise serializers.ValidationError("Amount must be greater than 0")
         return value
-        
+
     def validate_payment_type(self, value):
         """Validate payment type."""
-        if value not in ['payme', 'click', 'atmos']:
-            raise serializers.ValidationError("Payment type must be 'payme', 'click', or 'atmos'")
+        if value not in ['payme', 'click', 'uzum']:
+            raise serializers.ValidationError("Payment type must be 'payme', 'click', or 'uzum'")
         return value
 
 

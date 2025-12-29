@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from apps.payment.service import PaymentService
 from apps.payment.models import Invoice
+from apps.payment.service import PaymentService
 from apps.shop.serializers import OrderCreateSerializer, PaymentLinkResponseSerializer
 
 

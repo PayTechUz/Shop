@@ -2,7 +2,7 @@ from django.conf import settings
 
 from paytechuz.gateways.payme import PaymeGateway
 from paytechuz.gateways.click import ClickGateway
-from paytechuz.gateways.atmos import AtmosGateway
+from paytechuz.gateways.uzum.client import UzumGateway
 
 from paytechuz.integrations.django.models import PaymentTransaction
 
@@ -43,34 +43,18 @@ class PaymentService:
             )
             return result.get("payment_url")
 
-        if provider == 'atmos':
-            try:
-                paytechuz_config = getattr(settings, 'PAYTECHUZ', {})
-                atmos_config = paytechuz_config.get('ATMOS', {})
-
-                atmos_gateway = AtmosGateway(
-                    consumer_key=atmos_config.get('CONSUMER_KEY'),
-                    consumer_secret=atmos_config.get('CONSUMER_SECRET'),
-                    store_id=atmos_config.get('STORE_ID'),
-                    terminal_id=atmos_config.get('TERMINAL_ID'),
-                    is_test_mode=atmos_config.get('IS_TEST_MODE', True)
-                )
-
-                payment_result = atmos_gateway.create_payment(
-                    account_id=order_id,
-                    amount=float(amount)
-                )
-                PaymentTransaction.create_transaction(
-                    gateway=PaymentTransaction.ATMOS,
-                    transaction_id=payment_result['transaction_id'],
-                    account_id=str(order_id),
-                    amount=amount
-                )
-
-                return payment_result['payment_url']
-
-            except Exception as e:
-                raise ValueError(f"Atmos payment error: {str(e)}")
+        if provider == 'uzum':
+            uzum = UzumGateway(
+                api_key="17b2f7983ba2806407cb433c628e544b11d52bdf490c01e4689d9297553c8658",
+                terminal_id="e62769d0-d5ce-4d4e-a405-dfa4c362ea62",
+                is_test_mode=True
+            )
+            uzum_link = uzum.create_payment(
+                id=order_id,
+                amount=amount,
+                return_url="https://example.com/return"
+            )
+            return uzum_link
 
         raise ValueError(f"Unsupported payment type: {provider}")
 
