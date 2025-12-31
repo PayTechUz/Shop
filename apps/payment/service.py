@@ -4,8 +4,6 @@ from paytechuz.gateways.payme import PaymeGateway
 from paytechuz.gateways.click import ClickGateway
 from paytechuz.gateways.uzum.client import UzumGateway
 
-from paytechuz.integrations.django.models import PaymentTransaction
-
 from apps.payment.models import Invoice
 
 
@@ -20,12 +18,13 @@ class PaymentService:
             payme = PaymeGateway(
                 payme_id=paytechuz_settings['PAYME']['PAYME_ID'],
                 payme_key=paytechuz_settings['PAYME']['PAYME_KEY'],
-                is_test_mode=paytechuz_settings['PAYME']['IS_TEST_MODE'],
+                is_test_mode=paytechuz_settings['PAYME']['IS_TEST_MODE']
             )
             return payme.create_payment(
                 id=order_id,
                 amount=float(amount),
-                return_url="https://example.com/return"
+                return_url="https://example.com/return",
+                account_field_name=paytechuz_settings['PAYME']['ACCOUNT_FIELD'],
             )
 
         if provider == 'click':
